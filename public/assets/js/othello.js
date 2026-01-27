@@ -28,7 +28,8 @@ const gameState = {
     blackCount: 2,
     whiteCount: 2,
     isGameOver: false,
-    consecutivePasses: 0
+    consecutivePasses: 0,
+    passTimeoutId: null
 };
 
 // DOM要素
@@ -84,6 +85,7 @@ function initializeBoard() {
     gameState.board[center4] = WHITE;
     
     updateBoardDisplay();
+    updateCounts();
     highlightValidMoves();
 }
 
@@ -251,7 +253,8 @@ function handlePass() {
     }
     
     // 次のプレイヤーに切り替え
-    setTimeout(() => {
+    gameState.passTimeoutId = setTimeout(() => {
+        gameState.passTimeoutId = null;
         switchPlayer();
         passMessageElement.textContent = '';
         
@@ -343,6 +346,12 @@ function updateDisplay() {
  * ゲームをリセット
  */
 function resetGame() {
+    // 保留中のタイムアウトをクリア
+    if (gameState.passTimeoutId !== null) {
+        clearTimeout(gameState.passTimeoutId);
+        gameState.passTimeoutId = null;
+    }
+    
     // 状態をリセット
     gameState.board = Array(TOTAL_CELLS).fill(EMPTY);
     gameState.currentPlayer = BLACK;
@@ -357,7 +366,6 @@ function resetGame() {
     
     // 盤面を初期化
     initializeBoard();
-    updateCounts();
     updateDisplay();
 }
 
