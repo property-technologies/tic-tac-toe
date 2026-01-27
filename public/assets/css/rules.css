@@ -1,0 +1,170 @@
+/* ルールページ専用スタイル */
+
+.rules-container {
+    max-width: 800px;
+}
+
+.rules-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+}
+
+.rules-section h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rules-section p {
+    color: #555;
+    line-height: 1.8;
+    font-size: 1.05em;
+    margin-bottom: 10px;
+}
+
+.rules-list {
+    color: #555;
+    line-height: 1.8;
+    font-size: 1.05em;
+    padding-left: 25px;
+}
+
+.rules-list li {
+    margin-bottom: 15px;
+}
+
+.rules-list strong {
+    color: #667eea;
+    font-size: 1.1em;
+}
+
+/* 勝利パターンの例 */
+.example-board {
+    margin-top: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+}
+
+.example-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.example-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.mini-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    width: 120px;
+    height: 120px;
+}
+
+.mini-cell {
+    background: #f0f0f0;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.mini-cell.win {
+    background: #ffeaa7;
+    border-color: #667eea;
+}
+
+.example-label {
+    font-size: 0.9em;
+    color: #666;
+    font-weight: 500;
+}
+
+/* ボタングループ */
+.button-group {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.action-button {
+    padding: 15px 40px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+}
+
+.primary-button {
+    color: white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.primary-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.primary-button:active {
+    transform: translateY(0);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 600px) {
+    .rules-container {
+        padding: 20px;
+    }
+
+    .rules-section {
+        padding: 15px;
+    }
+
+    .rules-section h2 {
+        font-size: 1.3em;
+    }
+
+    .examples-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mini-board {
+        width: 100px;
+        height: 100px;
+    }
+
+    .mini-cell {
+        font-size: 1.2em;
+    }
+
+    .action-button {
+        padding: 12px 30px;
+        font-size: 1.1em;
+    }
+}
