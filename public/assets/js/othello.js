@@ -128,6 +128,7 @@ function handleCellClick(event) {
     passMessageElement.textContent = '';
     
     switchPlayer();
+    highlightValidMoves();
     
     // 次のプレイヤーが置ける場所があるかチェック
     if (!hasValidMoves(gameState.currentPlayer)) {
@@ -151,7 +152,6 @@ function placePiece(index, player) {
     
     updateBoardDisplay();
     updateCounts();
-    highlightValidMoves();
 }
 
 /**
