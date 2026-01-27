@@ -1,3 +1,23 @@
+<?php
+
+/**
+ * Simple Router for Tic-Tac-Toe Application
+ */
+
+$requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+$requestMethod = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+
+// Remove query string if exists
+$path = parse_url($requestUri, PHP_URL_PATH);
+
+// Route /health endpoint
+if ($path === '/health' && $requestMethod === 'GET') {
+    require_once __DIR__ . '/health.php';
+    exit;
+}
+
+// Default route - Tic-Tac-Toe game page
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>

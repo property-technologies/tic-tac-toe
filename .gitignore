@@ -7,6 +7,12 @@
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+# Composer
+/vendor/
+composer.lock
+
+# PHPUnit
+.phpunit.result.cache
 
 # IDE
 .idea/
@@ -14,10 +20,6 @@ Desktop.ini
 *.swp
 *.swo
 *~
-
-# PHP
-vendor/
-composer.lock
 
 # Logs
 *.log
