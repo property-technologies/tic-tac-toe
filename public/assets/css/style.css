@@ -31,6 +31,30 @@ h1 {
     font-size: 2em;
 }
 
+/* ルールリンク */
+.rules-link-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.rules-link {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #667eea;
+    text-decoration: none;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.rules-link:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+}
+
 /* ゲーム情報エリア */
 .game-info {
     margin-bottom: 20px;

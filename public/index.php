@@ -16,6 +16,12 @@ if ($path === '/health' && $requestMethod === 'GET') {
     exit;
 }
 
+// Route /rules endpoint
+if ($path === '/rules' && $requestMethod === 'GET') {
+    require_once __DIR__ . '/rules.php';
+    exit;
+}
+
 // Default route - Tic-Tac-Toe game page
 ?>
 <!DOCTYPE html>
@@ -29,6 +35,10 @@ if ($path === '/health' && $requestMethod === 'GET') {
 <body>
     <div class="container">
         <h1>マルバツゲーム</h1>
+        
+        <div class="rules-link-container">
+            <a href="/rules" class="rules-link">📖 ルールを見る</a>
+        </div>
         
         <div class="game-info">
             <div id="turn-display" class="turn-display">
