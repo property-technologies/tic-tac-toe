@@ -128,7 +128,6 @@ function handleCellClick(event) {
     passMessageElement.textContent = '';
     
     switchPlayer();
-    highlightValidMoves();
     
     // 次のプレイヤーが置ける場所があるかチェック
     if (!hasValidMoves(gameState.currentPlayer)) {
@@ -235,6 +234,7 @@ function highlightValidMoves() {
 function switchPlayer() {
     gameState.currentPlayer = gameState.currentPlayer === BLACK ? WHITE : BLACK;
     updateDisplay();
+    highlightValidMoves();
 }
 
 /**
@@ -258,7 +258,6 @@ function handlePass() {
         gameState.passTimeoutId = null;
         switchPlayer();
         passMessageElement.textContent = '';
-        highlightValidMoves();
         
         // 次のプレイヤーも置けない場合はパス処理を再帰的に呼び出し
         if (!hasValidMoves(gameState.currentPlayer)) {
