@@ -2,9 +2,12 @@
  * マルバツゲーム (Tic-Tac-Toe) - メインロジック
  */
 
+// 定数
+const BOARD_SIZE = 9;
+
 // ゲーム状態管理
 const gameState = {
-    board: Array(9).fill(''), // "" | "o" | "x"
+    board: Array(BOARD_SIZE).fill(''), // "" | "o" | "x"
     currentPlayer: 'o', // "o" | "x"
     winner: null, // "o" | "x" | "draw" | null
     isGameOver: false
@@ -161,7 +164,7 @@ function updateDisplay() {
  */
 function resetGame() {
     // 状態をリセット
-    gameState.board = Array(9).fill('');
+    gameState.board = Array(BOARD_SIZE).fill('');
     gameState.currentPlayer = 'o';
     gameState.winner = null;
     gameState.isGameOver = false;

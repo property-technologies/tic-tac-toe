@@ -107,10 +107,10 @@ h1 {
 }
 
 @keyframes pulse {
-    from {
+    0% {
         transform: scale(1);
     }
-    to {
+    100% {
         transform: scale(1.1);
     }
 }
