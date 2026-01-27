@@ -258,6 +258,7 @@ function handlePass() {
         gameState.passTimeoutId = null;
         switchPlayer();
         passMessageElement.textContent = '';
+        highlightValidMoves();
         
         // 次のプレイヤーも置けない場合はパス処理を再帰的に呼び出し
         if (!hasValidMoves(gameState.currentPlayer)) {
