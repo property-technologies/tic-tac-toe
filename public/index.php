@@ -22,46 +22,53 @@ if ($path === '/rules' && $requestMethod === 'GET') {
     exit;
 }
 
-// Default route - Tic-Tac-Toe game page
+// Route /tictactoe endpoint
+if ($path === '/tictactoe' && $requestMethod === 'GET') {
+    require_once __DIR__ . '/tictactoe.php';
+    exit;
+}
+
+// Route /othello endpoint
+if ($path === '/othello' && $requestMethod === 'GET') {
+    require_once __DIR__ . '/othello.php';
+    exit;
+}
+
+// Default route - Top page (game selection)
 ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>マルバツゲーム - Tic-Tac-Toe</title>
+    <title>ゲームセンター</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/top.css">
 </head>
 <body>
-    <div class="container">
-        <h1>マルバツゲーム</h1>
+    <div class="container top-container">
+        <h1>🎮 ゲームセンター</h1>
+        <p class="subtitle">遊びたいゲームを選んでください</p>
         
-        <div class="rules-link-container">
-            <a href="/rules" class="rules-link">📖 ルールを見る</a>
+        <div class="game-selection">
+            <a href="/tictactoe" class="game-card tictactoe">
+                <div class="game-icon">⭕❌</div>
+                <div class="game-title">マルバツゲーム</div>
+                <div class="game-description">
+                    3×3のマス目で、縦・横・斜めに<br>
+                    3つ揃えると勝ち！
+                </div>
+            </a>
+            
+            <a href="/othello" class="game-card othello">
+                <div class="game-icon">⚫⚪</div>
+                <div class="game-title">オセロ</div>
+                <div class="game-description">
+                    8×8のボードで駒を挟んで<br>
+                    反転させよう！
+                </div>
+            </a>
         </div>
-        
-        <div class="game-info">
-            <div id="turn-display" class="turn-display">
-                現在の手番: <span id="current-player">○</span>
-            </div>
-            <div id="game-status" class="game-status"></div>
-        </div>
-
-        <div id="board" class="board">
-            <div class="cell" data-index="0"></div>
-            <div class="cell" data-index="1"></div>
-            <div class="cell" data-index="2"></div>
-            <div class="cell" data-index="3"></div>
-            <div class="cell" data-index="4"></div>
-            <div class="cell" data-index="5"></div>
-            <div class="cell" data-index="6"></div>
-            <div class="cell" data-index="7"></div>
-            <div class="cell" data-index="8"></div>
-        </div>
-
-        <button id="reset-button" class="reset-button">リセット</button>
     </div>
-
-    <script src="assets/js/app.js"></script>
 </body>
 </html>
