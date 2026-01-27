@@ -3,7 +3,7 @@
     "description": "ブラウザ上で遊べるマルバツゲーム（Tic-Tac-Toe）のWebアプリ",
     "type": "project",
     "require": {
-        "php": ">=7.4"
+        "php": ">=8.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
