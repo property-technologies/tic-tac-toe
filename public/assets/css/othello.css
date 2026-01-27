@@ -32,8 +32,8 @@
 }
 
 .player-display.active {
-    border-color: #667eea;
-    background: #e8ebff;
+    border-color: #EA4B71;
+    background: #ffe8ef;
 }
 
 .player-icon {
@@ -61,7 +61,7 @@
     flex: 1;
     text-align: center;
     padding: 15px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #EA4B71 0%, #FDA830 100%);
     color: white;
     border-radius: 10px;
     font-size: 1.2em;
@@ -170,7 +170,7 @@
     font-size: 1.5em;
     font-weight: bold;
     min-height: 40px;
-    color: #764ba2;
+    color: #FDA830;
     margin-top: 10px;
 }
 
