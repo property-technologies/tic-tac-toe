@@ -51,7 +51,7 @@ if ($path === '/othello' && $requestMethod === 'GET') {
         <p class="subtitle">遊びたいゲームを選んでください</p>
         
         <div class="game-selection">
-            <a href="/tictactoe" class="game-card tictactoe">
+            <a href="./tictactoe.php" class="game-card tictactoe">
                 <div class="game-icon">⭕❌</div>
                 <div class="game-title">マルバツゲーム</div>
                 <div class="game-description">
@@ -60,7 +60,7 @@ if ($path === '/othello' && $requestMethod === 'GET') {
                 </div>
             </a>
             
-            <a href="/othello" class="game-card othello">
+            <a href="./othello.php" class="game-card othello">
                 <div class="game-icon">⚫⚪</div>
                 <div class="game-title">オセロ</div>
                 <div class="game-description">

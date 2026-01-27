@@ -11,8 +11,8 @@
         <h1>マルバツゲーム</h1>
         
         <div class="rules-link-container">
-            <a href="/" class="rules-link">🏠 トップに戻る</a>
-            <a href="/rules" class="rules-link">📖 ルールを見る</a>
+            <a href="./" class="rules-link">🏠 トップに戻る</a>
+            <a href="./rules.php" class="rules-link">📖 ルールを見る</a>
         </div>
         
         <div class="game-info">

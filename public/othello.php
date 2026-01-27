@@ -12,7 +12,7 @@
         <h1>オセロ</h1>
         
         <div class="rules-link-container">
-            <a href="/" class="rules-link">🏠 トップに戻る</a>
+            <a href="./" class="rules-link">🏠 トップに戻る</a>
         </div>
         
         <div class="game-info">
