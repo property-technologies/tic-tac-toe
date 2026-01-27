@@ -253,17 +253,20 @@ function handlePass() {
     }
     
     // 次のプレイヤーに切り替え
-    gameState.passTimeoutId = setTimeout(() => {
-        gameState.passTimeoutId = null;
-        switchPlayer();
-        passMessageElement.textContent = '';
-        
-        // 次のプレイヤーも置けない場合は即座にゲーム終了
-        if (!hasValidMoves(gameState.currentPlayer)) {
-            gameState.consecutivePasses++;
-            endGame();
+    const timeoutId = setTimeout(() => {
+        if (gameState.passTimeoutId === timeoutId) {
+            gameState.passTimeoutId = null;
+            switchPlayer();
+            passMessageElement.textContent = '';
+            
+            // 次のプレイヤーも置けない場合は即座にゲーム終了
+            if (!hasValidMoves(gameState.currentPlayer)) {
+                gameState.consecutivePasses++;
+                endGame();
+            }
         }
     }, 1500);
+    gameState.passTimeoutId = timeoutId;
 }
 
 /**
@@ -347,10 +350,8 @@ function updateDisplay() {
  */
 function resetGame() {
     // 保留中のタイムアウトをクリア
-    if (gameState.passTimeoutId !== null) {
-        clearTimeout(gameState.passTimeoutId);
-        gameState.passTimeoutId = null;
-    }
+    clearTimeout(gameState.passTimeoutId);
+    gameState.passTimeoutId = null;
     
     // 状態をリセット
     gameState.board = Array(TOTAL_CELLS).fill(EMPTY);
