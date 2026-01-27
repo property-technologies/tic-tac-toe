@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Arial', 'Helvetica', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #EA4B71 0%, #FDA830 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -40,19 +40,19 @@ h1 {
 .rules-link {
     display: inline-block;
     padding: 10px 20px;
-    color: #667eea;
+    color: #EA4B71;
     text-decoration: none;
-    border: 2px solid #667eea;
+    border: 2px solid #EA4B71;
     border-radius: 8px;
     font-weight: bold;
     transition: all 0.3s ease;
 }
 
 .rules-link:hover {
-    background: #667eea;
+    background: #EA4B71;
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 10px rgba(234, 75, 113, 0.3);
 }
 
 /* ゲーム情報エリア */
@@ -69,7 +69,7 @@ h1 {
 
 #current-player {
     font-weight: bold;
-    color: #667eea;
+    color: #EA4B71;
     font-size: 1.3em;
 }
 
@@ -78,7 +78,7 @@ h1 {
     font-size: 1.5em;
     font-weight: bold;
     min-height: 40px;
-    color: #764ba2;
+    color: #FDA830;
 }
 
 /* 盤面 */
@@ -109,7 +109,7 @@ h1 {
 
 .cell:hover:not(.occupied) {
     background: #e0e0e0;
-    border-color: #667eea;
+    border-color: #EA4B71;
     transform: scale(1.05);
 }
 
@@ -118,11 +118,11 @@ h1 {
 }
 
 .cell.player-o {
-    color: #667eea;
+    color: #EA4B71;
 }
 
 .cell.player-x {
-    color: #e74c3c;
+    color: #FDA830;
 }
 
 .cell.winning {
@@ -147,7 +147,7 @@ h1 {
     font-size: 1.2em;
     font-weight: bold;
     color: white;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #EA4B71 0%, #FDA830 100%);
     border: none;
     border-radius: 10px;
     cursor: pointer;

@@ -9,7 +9,7 @@
     padding: 20px;
     background: #f9f9f9;
     border-radius: 10px;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid #EA4B71;
 }
 
 .rules-section h2 {
@@ -40,7 +40,7 @@
 }
 
 .rules-list strong {
-    color: #667eea;
+    color: #EA4B71;
     font-size: 1.1em;
 }
 
@@ -89,12 +89,12 @@
     align-items: center;
     font-size: 1.5em;
     font-weight: bold;
-    color: #667eea;
+    color: #EA4B71;
 }
 
 .mini-cell.win {
     background: #ffeaa7;
-    border-color: #667eea;
+    border-color: #EA4B71;
 }
 
 .example-label {
@@ -124,7 +124,7 @@
 
 .primary-button {
     color: white;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #EA4B71 0%, #FDA830 100%);
 }
 
 .primary-button:hover {
