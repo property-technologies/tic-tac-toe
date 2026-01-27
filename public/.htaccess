@@ -1,0 +1,92 @@
+# Xserver用 .htaccess設定ファイル
+# エックスサーバーでの動作に最適化
+
+# ===========================
+# 基本設定
+# ===========================
+
+# 文字コード設定
+AddDefaultCharset UTF-8
+
+# インデックスファイルの優先順位
+DirectoryIndex index.php index.html
+
+# ===========================
+# セキュリティ設定
+# ===========================
+
+# ディレクトリリスティングを無効化
+Options -Indexes
+
+# .htaccessと.htpasswdへのアクセスを禁止
+<Files ~ "^\.ht">
+    Require all denied
+</Files>
+
+# 特定のファイルへのアクセスを禁止
+<FilesMatch "\.(ini|log|conf)$">
+    Require all denied
+</FilesMatch>
+
+# ===========================
+# URL書き換えルール
+# ===========================
+
+# Rewriteエンジンを有効化
+RewriteEngine On
+
+# ベースディレクトリ（サブディレクトリにデプロイする場合は変更）
+# 例: /myapp/ にデプロイする場合は RewriteBase /myapp/
+RewriteBase /
+
+# HTTPSリダイレクト（本番環境で有効化する場合はコメントを外す）
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# 実ファイルが存在する場合はそのまま表示
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# すべてのリクエストをindex.phpにルーティング
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# ===========================
+# パフォーマンス最適化
+# ===========================
+
+# 静的ファイルのキャッシュ設定
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # 画像
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    
+    # CSS と JavaScript
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType text/javascript "access plus 1 week"
+    
+    # フォント
+    ExpiresByType font/woff "access plus 1 month"
+    ExpiresByType font/woff2 "access plus 1 month"
+    ExpiresByType application/font-woff "access plus 1 month"
+    ExpiresByType application/font-woff2 "access plus 1 month"
+</IfModule>
+
+# Gzip圧縮を有効化
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# ===========================
+# エラーページ設定
+# ===========================
+
+# エラーページのカスタマイズ
+ErrorDocument 404 /error/404.html
+ErrorDocument 500 /error/500.html
