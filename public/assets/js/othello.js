@@ -241,10 +241,11 @@ function switchPlayer() {
  * パス処理
  */
 function handlePass() {
-    gameState.consecutivePasses++;
-    
     const playerName = gameState.currentPlayer === BLACK ? '黒' : '白';
     passMessageElement.textContent = `${playerName}は置ける場所がありません。パスします。`;
+    
+    // consecutivePassesをインクリメント
+    gameState.consecutivePasses++;
     
     // 両者がパスした場合、ゲーム終了
     if (gameState.consecutivePasses >= 2) {
@@ -252,21 +253,19 @@ function handlePass() {
         return;
     }
     
-    // 次のプレイヤーに切り替え
-    const timeoutId = setTimeout(() => {
-        if (gameState.passTimeoutId === timeoutId) {
+    // 次のプレイヤーに切り替え（タイムアウトIDを先に設定）
+    gameState.passTimeoutId = setTimeout(() => {
+        if (gameState.passTimeoutId !== null) {
             gameState.passTimeoutId = null;
             switchPlayer();
             passMessageElement.textContent = '';
             
-            // 次のプレイヤーも置けない場合は即座にゲーム終了
+            // 次のプレイヤーも置けない場合はパス処理を再帰的に呼び出し
             if (!hasValidMoves(gameState.currentPlayer)) {
-                gameState.consecutivePasses++;
-                endGame();
+                handlePass();
             }
         }
     }, 1500);
-    gameState.passTimeoutId = timeoutId;
 }
 
 /**
