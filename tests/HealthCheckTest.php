@@ -16,9 +16,13 @@ class HealthCheckTest extends TestCase
      */
     private function getHealthEndpointOutput(): string
     {
-        ob_start();
-        require __DIR__ . '/../public/health.php';
-        return ob_get_clean();
+        $phpBinary = escapeshellarg(PHP_BINARY);
+        $scriptPath = escapeshellarg(__DIR__ . '/../public/health.php');
+        $command = $phpBinary . ' ' . $scriptPath;
+
+        $output = shell_exec($command);
+
+        return $output !== null ? $output : '';
     }
 
     /**
