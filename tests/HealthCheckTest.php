@@ -10,25 +10,27 @@ use PHPUnit\Framework\TestCase;
 class HealthCheckTest extends TestCase
 {
     /**
+     * Helper method to get health endpoint response
+     *
+     * @return string
+     */
+    private function getHealthEndpointOutput(): string
+    {
+        ob_start();
+        require __DIR__ . '/../public/health.php';
+        return ob_get_clean();
+    }
+
+    /**
      * Test health endpoint returns correct response
      *
      * @runInSeparateProcess
      */
     public function testHealthEndpointReturnsOk(): void
     {
-        // Start output buffering to capture the response
-        ob_start();
-        
-        // Include the health check endpoint
-        require __DIR__ . '/../public/health.php';
-        
-        // Get the output
-        $output = ob_get_clean();
-        
-        // Decode JSON response
+        $output = $this->getHealthEndpointOutput();
         $response = json_decode($output, true);
         
-        // Assert the response
         $this->assertIsArray($response);
         $this->assertArrayHasKey('status', $response);
         $this->assertEquals('ok', $response['status']);
@@ -41,17 +43,9 @@ class HealthCheckTest extends TestCase
      */
     public function testHealthEndpointReturnsValidJson(): void
     {
-        // Start output buffering
-        ob_start();
-        
-        // Include the health check endpoint
-        require __DIR__ . '/../public/health.php';
-        
-        // Get the output
-        $output = ob_get_clean();
-        
-        // Verify it's valid JSON
+        $output = $this->getHealthEndpointOutput();
         $response = json_decode($output, true);
+        
         $this->assertNotNull($response);
         $this->assertEquals(JSON_ERROR_NONE, json_last_error());
     }
@@ -63,19 +57,9 @@ class HealthCheckTest extends TestCase
      */
     public function testHealthEndpointStructure(): void
     {
-        // Start output buffering
-        ob_start();
-        
-        // Include the health check endpoint
-        require __DIR__ . '/../public/health.php';
-        
-        // Get the output
-        $output = ob_get_clean();
-        
-        // Decode and verify structure
+        $output = $this->getHealthEndpointOutput();
         $response = json_decode($output, true);
         
-        // Check exact structure
         $this->assertEquals(['status' => 'ok'], $response);
     }
 }
