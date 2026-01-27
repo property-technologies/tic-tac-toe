@@ -1,3 +1,12 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
 # Composer
 /vendor/
 composer.lock
@@ -12,6 +21,11 @@ composer.lock
 *.swo
 *~
 
-# OS
-.DS_Store
-Thumbs.db
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
