@@ -35,6 +35,10 @@ Options -Indexes
 # Rewriteエンジンを有効化
 RewriteEngine On
 
+# ベースディレクトリ（サブディレクトリにデプロイする場合は変更）
+# 例: /myapp/ にデプロイする場合は RewriteBase /myapp/
+RewriteBase /
+
 # HTTPSリダイレクト（本番環境で有効化する場合はコメントを外す）
 # RewriteCond %{HTTPS} off
 # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
@@ -44,7 +48,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # すべてのリクエストをindex.phpにルーティング
-RewriteRule ^(.*)$ /index.php [QSA,L]
+RewriteRule ^(.*)$ index.php [QSA,L]
 
 # ===========================
 # パフォーマンス最適化
