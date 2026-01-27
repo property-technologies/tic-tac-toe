@@ -255,15 +255,13 @@ function handlePass() {
     
     // 次のプレイヤーに切り替え（タイムアウトIDを先に設定）
     gameState.passTimeoutId = setTimeout(() => {
-        if (gameState.passTimeoutId !== null) {
-            gameState.passTimeoutId = null;
-            switchPlayer();
-            passMessageElement.textContent = '';
-            
-            // 次のプレイヤーも置けない場合はパス処理を再帰的に呼び出し
-            if (!hasValidMoves(gameState.currentPlayer)) {
-                handlePass();
-            }
+        gameState.passTimeoutId = null;
+        switchPlayer();
+        passMessageElement.textContent = '';
+        
+        // 次のプレイヤーも置けない場合はパス処理を再帰的に呼び出し
+        if (!hasValidMoves(gameState.currentPlayer)) {
+            handlePass();
         }
     }, 1500);
 }
