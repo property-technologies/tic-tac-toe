@@ -18,11 +18,15 @@ class RulesPageTest extends TestCase
     {
         $phpBinary = escapeshellarg(PHP_BINARY);
         $scriptPath = escapeshellarg(__DIR__ . '/../public/rules.php');
-        $command = $phpBinary . ' ' . $scriptPath;
+        $command = $phpBinary . ' ' . $scriptPath . ' 2>&1';
 
         $output = shell_exec($command);
 
-        return $output !== null ? $output : '';
+        if ($output === null) {
+            $this->fail('Failed to execute PHP script');
+        }
+
+        return $output;
     }
 
     /**
