@@ -4,13 +4,19 @@
 
 // 定数
 const BOARD_SIZE = 9;
+const MAX_MARKS_PER_PLAYER = 3; // 各プレイヤーの最大マーク数
 
 // ゲーム状態管理
 const gameState = {
     board: Array(BOARD_SIZE).fill(''), // "" | "o" | "x"
     currentPlayer: 'o', // "o" | "x"
     winner: null, // "o" | "x" | "draw" | null
-    isGameOver: false
+    isGameOver: false,
+    // 各プレイヤーのマーク履歴（配置順序を追跡）
+    moveHistory: {
+        o: [], // [index1, index2, index3]
+        x: []  // [index1, index2, index3]
+    }
 };
 
 // 勝利パターン (0-8のインデックス)
@@ -59,8 +65,18 @@ function handleCellClick(event) {
         return;
     }
 
+    // 現在のプレイヤーのマーク履歴を取得
+    const currentPlayerHistory = gameState.moveHistory[gameState.currentPlayer];
+
+    // マーク数が上限に達している場合、最も古いマークを削除
+    if (currentPlayerHistory.length >= MAX_MARKS_PER_PLAYER) {
+        const oldestIndex = currentPlayerHistory.shift(); // 最古のインデックスを削除
+        removeMarkFromCell(oldestIndex);
+    }
+
     // マスに現在のプレイヤーのマークを配置
     gameState.board[index] = gameState.currentPlayer;
+    currentPlayerHistory.push(index); // 履歴に追加
     updateCellDisplay(cell, index);
 
     // 勝敗判定
@@ -85,6 +101,22 @@ function updateCellDisplay(cell, index) {
         cell.textContent = '×';
         cell.classList.add('occupied', 'player-x');
     }
+}
+
+/**
+ * セルからマークを削除
+ */
+function removeMarkFromCell(index) {
+    const cell = cells[index];
+    gameState.board[index] = '';
+    
+    // フェードアウトアニメーション
+    cell.classList.add('fading-out');
+    
+    setTimeout(() => {
+        cell.textContent = '';
+        cell.classList.remove('occupied', 'player-o', 'player-x', 'fading-out');
+    }, 300); // アニメーション時間と同期
 }
 
 /**
@@ -168,11 +200,15 @@ function resetGame() {
     gameState.currentPlayer = 'o';
     gameState.winner = null;
     gameState.isGameOver = false;
+    gameState.moveHistory = {
+        o: [],
+        x: []
+    };
 
     // セルの表示をリセット
     cells.forEach(cell => {
         cell.textContent = '';
-        cell.classList.remove('occupied', 'player-o', 'player-x', 'winning');
+        cell.classList.remove('occupied', 'player-o', 'player-x', 'winning', 'fading-out');
     });
 
     // ステータス表示をクリア
