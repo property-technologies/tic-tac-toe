@@ -22,6 +22,12 @@ if ($path === '/rules' && $requestMethod === 'GET') {
     exit;
 }
 
+// Route /othello-rules endpoint
+if ($path === '/othello-rules' && $requestMethod === 'GET') {
+    require_once __DIR__ . '/othello-rules.php';
+    exit;
+}
+
 // Route /tictactoe endpoint
 if ($path === '/tictactoe' && $requestMethod === 'GET') {
     require_once __DIR__ . '/tictactoe.php';
