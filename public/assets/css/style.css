@@ -130,12 +130,27 @@ h1 {
     animation: pulse 0.5s ease-in-out infinite alternate;
 }
 
+.cell.fading-out {
+    animation: fadeOut 0.3s ease-out;
+}
+
 @keyframes pulse {
     0% {
         transform: scale(1);
     }
     100% {
         transform: scale(1.1);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.8);
     }
 }
 

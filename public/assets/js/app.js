@@ -4,13 +4,21 @@
 
 // 定数
 const BOARD_SIZE = 9;
+const MAX_MARKS_PER_PLAYER = 3; // 各プレイヤーの最大マーク数
+const FADE_OUT_DURATION_MS = 300; // フェードアウトアニメーションの時間（ミリ秒）
 
 // ゲーム状態管理
 const gameState = {
     board: Array(BOARD_SIZE).fill(''), // "" | "o" | "x"
     currentPlayer: 'o', // "o" | "x"
     winner: null, // "o" | "x" | "draw" | null
-    isGameOver: false
+    isGameOver: false,
+    // 各プレイヤーのマーク履歴（配置順序を追跡）
+    // 最大3つのインデックスを保持し、4つ目が追加されると最古が削除される
+    moveHistory: {
+        o: [], // 最新3手のインデックスを保持
+        x: []  // 最新3手のインデックスを保持
+    }
 };
 
 // 勝利パターン (0-8のインデックス)
@@ -59,18 +67,34 @@ function handleCellClick(event) {
         return;
     }
 
-    // マスに現在のプレイヤーのマークを配置
+    // 現在のプレイヤーのマーク履歴を取得
+    const currentPlayerHistory = gameState.moveHistory[gameState.currentPlayer];
+
+    // マスに現在のプレイヤーのマークを配置（一時的）
     gameState.board[index] = gameState.currentPlayer;
+    currentPlayerHistory.push(index); // 履歴に追加
+    
+    // 勝敗判定（新しいマークで勝利したかチェック）
+    checkWinner();
+    
+    // 勝利した場合、セルを表示して終了
+    if (gameState.isGameOver) {
+        updateCellDisplay(cell, index);
+        return;
+    }
+
+    // マーク数が上限を超えた場合、最も古いマークを削除
+    if (currentPlayerHistory.length > MAX_MARKS_PER_PLAYER) {
+        const oldestIndex = currentPlayerHistory.shift(); // 最古のインデックスを削除
+        removeMarkFromCell(oldestIndex);
+    }
+    
+    // 新しいマークを表示
     updateCellDisplay(cell, index);
 
-    // 勝敗判定
-    checkWinner();
-
-    // ゲームが終了していなければプレイヤーを切り替え
-    if (!gameState.isGameOver) {
-        switchPlayer();
-        updateDisplay();
-    }
+    // プレイヤーを切り替え
+    switchPlayer();
+    updateDisplay();
 }
 
 /**
@@ -85,6 +109,25 @@ function updateCellDisplay(cell, index) {
         cell.textContent = '×';
         cell.classList.add('occupied', 'player-x');
     }
+}
+
+/**
+ * セルからマークを削除
+ */
+function removeMarkFromCell(index) {
+    const cell = cells[index];
+    
+    // ボード状態を即座に更新（クリック判定のため）
+    gameState.board[index] = '';
+    
+    // フェードアウトアニメーションを開始
+    cell.classList.add('fading-out');
+    
+    setTimeout(() => {
+        // アニメーション完了後にUIを更新
+        cell.textContent = '';
+        cell.classList.remove('occupied', 'player-o', 'player-x', 'fading-out');
+    }, FADE_OUT_DURATION_MS);
 }
 
 /**
@@ -117,12 +160,9 @@ function checkWinner() {
         }
     }
 
-    // 引き分け判定（全マスが埋まっている）
-    if (!gameState.board.includes('')) {
-        gameState.winner = 'draw';
-        gameState.isGameOver = true;
-        displayDraw();
-    }
+    // 注意: 新ルールでは、各プレイヤーは最大3マークまでしか置けないため、
+    // 全マスが埋まることはありません。そのため、従来の引き分け判定は
+    // 発生しません。ゲームは勝者が出るまで続きます。
 }
 
 /**
@@ -168,11 +208,15 @@ function resetGame() {
     gameState.currentPlayer = 'o';
     gameState.winner = null;
     gameState.isGameOver = false;
+    gameState.moveHistory = {
+        o: [],
+        x: []
+    };
 
     // セルの表示をリセット
     cells.forEach(cell => {
         cell.textContent = '';
-        cell.classList.remove('occupied', 'player-o', 'player-x', 'winning');
+        cell.classList.remove('occupied', 'player-o', 'player-x', 'winning', 'fading-out');
     });
 
     // ステータス表示をクリア
