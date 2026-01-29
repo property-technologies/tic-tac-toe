@@ -12,7 +12,7 @@
         <h1>オセロ</h1>
         
         <div class="rules-link-container">
-            <a href="./othello-rules.php" class="rules-link">📖 ルールを見る</a>
+            <a href="./othello-rules" class="rules-link">📖 ルールを見る</a>
             <a href="./" class="rules-link">🏠 トップに戻る</a>
         </div>
         
